@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="mapdb/src"/>
+	<classpathentry kind="lib" path="mapdb/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="mapdb/javax.ws.rs.jar"/>
+	<classpathentry kind="lib" path="mapdb/jdbm-3.0-alpha4.jar"/>
+	<classpathentry kind="lib" path="mapdb/kryo-2.20-all.jar"/>
+	<classpathentry kind="lib" path="mapdb/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="mapdb/org.json.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="mapdb/bin"/>
+</classpath>

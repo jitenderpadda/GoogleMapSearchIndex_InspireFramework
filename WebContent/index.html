@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <title>Google Maps</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Jquery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--Bootstrap--->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Jquery UI-->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!--GoogleMap JS-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-dylXl89QOKbTI3qyOBd21OeDaNQpEyk&callback=initMap" async defer></script>
+        <!--Custom JS-->
+        <script src="js/index.js"></script>
+        <!--Custom Theme and Style-->
+        <link href="css/themeStyle.css" rel="stylesheet" type="text/css">
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <!--Nav Bar-->
+        <header class="site-header">
+            <div class="top">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="col-sm-3 col-sm-offset-9">
+                            <div class="g-signin2" style="float: right;font-family: Montserrat !important;" data-onsuccess="onSignIn" data-theme="dark"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--Body-->
+        <body>
+            <div class="container">
+                <div class="row">
+                    <br/>
+                    <div class="col-md-4">
+                    <!-- <strong><h1 style="font-family: Montserrat !important;">Inspire Framework</h1></strong> -->
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <form id="validationForm">
+                        <div class="col-md-6">
+                            <!--<input id="search" autofocus class="form-control" type="text" onkeyup="getMenuItems(this.value)" placeholder="Search">-->
+                            <input id="search" style="font-family:Montserrat;" autofocus class="form-control" type="text" placeholder="Search Location" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn-primary">
+                                <span style="font-family:Montserrat">Search</span>
+                            </button>
+                            <img id="loader" class="hidden" src="img/loader_gear.svg" height="30px">
+                        </div>
+                        <div class="col-md-4">
+                        	<label for="ResultSizeThreshold">Result Size Threshold</label>
+                            <input id="ResultSizeThreshold" class="form-control" type="number" required>
+                        </div>
+                        <!--  <div class="col-md-2">
+                            <input class="form-control" type="text">
+                        </div> -->
+                    </form>
+                </div>
+                <br/>
+                <div class="row">
+                    <!--Map-->
+                    <div class="col-md-6" id="map"></div>
+                    <!--Search Result--->
+                    <div class="col-md-6" style="height:350px;overflow-x: auto;">
+                        <table id="resultTable" class="ui celled striped table">
+                            <thead>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!--Inserted dynamically via Jquery-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </body>
+        <!--Footer-->
+        <footer class="site-footer">
+            <div id="copyright">
+                <div class="container">
+                    <p class="pull-left">&copy;2018 RMIT</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
