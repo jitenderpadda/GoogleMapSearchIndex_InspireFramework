@@ -296,9 +296,13 @@ public class QueryEngine
     
     long spStop = System.currentTimeMillis();
     stopWatch.prefixRangeTime += ( spStop - spStart) ;
+    System.out.println("resultMap.size()---"+resultMap.size());
+    System.out.println("query.getResultSizeThreshold()---"+query.getResultSizeThreshold());
     
-    if ( resultMap.size() >= query.getResultSizeThreshold() )
+    //if ( resultMap.size() >= query.getResultSizeThreshold() )
+    if ( resultMap.size() >= this.resultSizeThreshold)
     {
+      System.out.println("Threshold greater");
       return resultMap;
     }           
       

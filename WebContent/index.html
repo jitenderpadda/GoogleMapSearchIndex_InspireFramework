@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-md-4">
                         	<label for="ResultSizeThreshold">Result Size Threshold</label>
-                            <input id="ResultSizeThreshold" class="form-control" type="number" required>
+                            <input id="ResultSizeThreshold" class="form-control" type="number" value="5" required>
                         </div>
                         <!--  <div class="col-md-2">
                             <input class="form-control" type="text">
@@ -69,13 +69,28 @@
                     <!--Map-->
                     <div class="col-md-6" id="map"></div>
                     <!--Search Result--->
-                    <div class="col-md-6" style="height:350px;overflow-x: auto;">
+                    <div class="col-md-6" style="height:300px;overflow-x: auto;">
                         <table id="resultTable" class="ui celled striped table">
                             <thead>
                                 <tr>
                                     <th>Location</th>
                                     <th>Latitude</th>
                                     <th>Longitude</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!--Inserted dynamically via Jquery-->
+                            </tbody>
+                        </table>
+                        <br/> 	  	  	 
+                        <table id="stopWatch" class="ui celled striped table">
+                            <thead>
+                                <tr>
+                                    <th>type</th>
+                                    <th>count</th>
+                                    <th>time</th>
+                                    <th>avg</th>
                                 </tr>
                             </thead>
                             <tbody>

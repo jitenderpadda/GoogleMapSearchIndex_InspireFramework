@@ -47,6 +47,8 @@ public class RunQueryLatest
     double areaEnlargedRatio;
     int queryType;
     
+    public StopWatch stopWatch; 
+    
 	public RunQueryLatest(String dataFile, String query, String infrequentFile, String invertedIndexFile, int smallQValue, int largeQValue, int positionUpperBound, int sparseThreshold, int selectivityThreshold, int resultSizeThreshold, int visitingNodeSizeThreshold, double scarceThreshold, double rangeRadius, double areaEnlargedRatio, int queryType) {
 	  this.dataFile=dataFile;
 	  this.query=query;
@@ -129,7 +131,7 @@ public class RunQueryLatest
      visitingNodeSizeThreshold, 
      scarceThreshold, areaEnlargedRatio, positionUpperBound);
 
-   StopWatch stopWatch = new StopWatch();
+   stopWatch = new StopWatch();
    
    //LineNumberReader queryReader = new LineNumberReader(new FileReader(queryFile));
 
@@ -191,9 +193,10 @@ public class RunQueryLatest
      //Create result
      for(int objId : resultMap.keySet()) {
   	   SpatialObject sObj=objectDatabase.getSpatialObject(objId);
-  	   Result res=new Result(sObj.getPoint().getCoord(1), sObj.getPoint().getCoord(0), sObj.getText());
+  	   //System.out.println("resultMap.get(objId)---"+resultMap.get(objId));
+  	   Result res=new Result(sObj.getPoint().getCoord(1), sObj.getPoint().getCoord(0), sObj.getText(), resultMap.get(objId).getKey().toString());
   	   resultList.add(res);
-     }
+     } 
      
    }
    objectDatabase.close();

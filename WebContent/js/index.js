@@ -17,14 +17,17 @@ function search(){
     clearMarkers();
     $("#loader").removeClass("hidden");
     $("#resultTable > tbody > tr").empty();
+    $("#stopWatch > tbody > tr").empty();
     requestTerm = $("#search").val().trim();
     var searchTerm=encodeURI(requestTerm);
     console.log(searchTerm);
     console.log(requestTerm);
     var center=map.getCenter();
     console.log('lat--'+center.lat()+' long-'+center.lng());
+    console.log($('#ResultSizeThreshold').val());
     var url;
-    //url="http://localhost:8080/GoogleMaps_BigData_Assignment_1/restservices/helloworld?search="+"1 "+center.lat()+" "+center.lng()+" "+searchTerm+"&resultSizeThreshold="+$('#ResultSizeThreshold').val();
+    //url="http://localhost:8080/GoogleMaps_BigData_Assignment_1/restservices/helloworld?search="+"1 "+0.225038+" "+0.95817+" "+searchTerm+"&resultSizeThreshold="+$('#ResultSizeThreshold').val();
+    //url="http://localhost:8080/GoogleMaps_BigData_Assignment_1/restservices/helloworld?search="+"1 "+0.237138+" "+0.942659+" "+searchTerm+"&resultSizeThreshold="+$('#ResultSizeThreshold').val();
     url="http://localhost:8080/GoogleMaps_BigData_Assignment_1/restservices/helloworld?search="+"1 "+((center.lat()+39)/5)+" "+(((center.lng()-140)/5)-0.05)+" "+searchTerm+"&resultSizeThreshold="+$('#ResultSizeThreshold').val();
     req = new XMLHttpRequest();
     req.onreadystatechange = function () {
@@ -35,25 +38,31 @@ function search(){
             $("#loader").addClass("hidden");
             $("#resultTable").show();
             if (result != null) {
-            	var resp =new Array(result.length);
+                console.log("result---- "+result);
+                var ObjList=Object.values(result)[0];
+                console.log(ObjList);
+                var stopWatch=Object.keys(result)[0];
+                console.log(stopWatch);
+            	var resp =new Array(ObjList.length);
             	//Add current location to Bounds
             	bounds = new google.maps.LatLngBounds();
             	bounds.extend(pos);
-                for(var i=0;i<result.length;i++){
-                    console.log(result[i]);
-                    console.log(result[i].name);
-                    resp[i]=result[i].name;
+                for(var i=0;i<ObjList.length;i++){
+                    console.log(ObjList[i]);
+                    console.log(ObjList[i].name);
+                    console.log(ObjList[i].queryType);
+                    resp[i]=ObjList[i].name;
                     /*******Add to Map and Table****/
                     var row = "<tr>"
-                        + "<td>" + result[i].name + "</td><td>" + ((result[i].lat*5)-39) + "</td><td>" + (((result[i].lon+0.05)*5)+140) + "</td><td>"
+                        + "<td>" + ObjList[i].name + "</td><td>" + ((ObjList[i].lat*5)-39) + "</td><td>" + (((ObjList[i].lon+0.05)*5)+140) + "</td><td>" + ObjList[i].queryType
                     	//+ "<td>" + result[i].name + "</td><td>" + result[i].lat + "</td><td>" + result[i].lon + "</td><td>"
-                        //+ "</td>"
+                        + "</td>"
                         + "</tr>"
                     $("#resultTable").append(row);
                     console.log($("#resultTable"));
                     /***Create Map Marker***/
-                    var lat = result[i].lat*5-39;
-                    var long = (result[i].lon+0.05)*5+140;
+                    var lat = ObjList[i].lat*5-39;
+                    var long = (ObjList[i].lon+0.05)*5+140;
                     //var lat = result[i].lat;
                     //var long = result[i].lon;
 
@@ -77,6 +86,18 @@ function search(){
                     bounds.extend(position);
                 }
                 map.fitBounds(bounds);
+                console.log("stopWatch--"+stopWatch);
+                var stopWatchResult=stopWatch.split("\n");
+                console.log("stopWatchResult--"+stopWatchResult);
+                for(var i=1;i<stopWatchResult.length-1;i++){
+                	var line=stopWatchResult[i].split("\t");
+                	var row = "<tr>"
+                        + "<td>" + line[0] + "</td><td>" + line[1] + "</td><td>" + line[2] + "</td><td>" + line[3]
+                        + "</td>"
+                        + "</tr>"
+                    $("#stopWatch").append(row);
+                }
+                //$("#stopWatch").html(stopWatch.replace(/\n/g,"<br/>"));
             }
         }
     }
